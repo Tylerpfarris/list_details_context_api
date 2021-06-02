@@ -1,9 +1,14 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { useVillageFetchById } from '../hooks/useVillagerFetchById';
+import { ThemeContext } from '../state/ThemeContext';
 
 function VillagerDetail({ match }) {
-  console.log(match);
-  const { villager, loading } = useVillageFetchById(match.params.id);
+   const { villager, loading } = useVillageFetchById(match.params.id);
+   
+  const theme = useContext(ThemeContext);
+   const darkMode = theme.state.darkMode;
+   
+
 
   if (loading) return <h1>Loading...</h1>;
   else
@@ -14,16 +19,29 @@ function VillagerDetail({ match }) {
         }}
       >
         <div
-          style={{
-            backgroundColor: `${villager.bubbleColor}`,
-            color: `${villager.textColor}`,
-            margin: 'auto',
-            marginTop: '50px',
-            width: '500px',
-            textAlign: 'center',
-            paddingTop: '20px',
-            paddingBottom: '20px',
-          }}
+          style={
+            darkMode
+              ? {
+                  backgroundColor: 'black',
+                  color: 'white',
+                  margin: 'auto',
+                  marginTop: '50px',
+                  width: '500px',
+                  textAlign: 'center',
+                  paddingTop: '20px',
+                  paddingBottom: '20px',
+                }
+              : {
+                  backgroundColor: `${villager.bubbleColor}`,
+                  color: `${villager.textColor}`,
+                  margin: 'auto',
+                  marginTop: '50px',
+                  width: '500px',
+                  textAlign: 'center',
+                  paddingTop: '20px',
+                  paddingBottom: '20px',
+                }
+          }
         >
           <h1>{villager.villager}</h1>
           <img

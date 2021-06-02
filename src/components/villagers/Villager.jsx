@@ -1,25 +1,69 @@
-import React, { useContext } from 'react'
-import { ThemeContext } from '../state/ThemeContext'
+import React, { useContext } from 'react';
+import { ThemeContext } from '../state/ThemeContext';
+import {
+  Card,
+  CardMedia,
+  CardActionArea,
+  CardContent,
+  Typography,
+} from '@material-ui/core';
+import { makeStyles} from '@material-ui/core/styles';
 
+function Villager({
+  villager,
+  catchPhrase,
+  villagerImage,
+}) {
 
-function Villager({ villagerId, villager, catchPhrase, villagerImage, bubbleColor, textColor }) {
-   const theme = useContext(ThemeContext);
-   const darkMode = theme.state.darkMode;
+  const useStyles = makeStyles({
+    root: {
+      width: 200,
+     
+    },
+    media: {
+      height: 175,
+    },
+     themeDark: {
+        backgroundColor: 'black',
+      color: 'white',
+    },
+     themeLight: {
+        backgroundColor: 'white',
+      color: 'black',
+    },
+  });
+
+  const theme = useContext(ThemeContext);
+  const darkMode = theme.state.darkMode;
+  const classes = useStyles();
    return (
-      <div style={
-         darkMode ? {
-            backgroundColor: 'black',
-            color: 'white'
-         } : {
-         backgroundColor: bubbleColor,
-         color: textColor,
-         
-      }}>
-         <img src={villagerImage} alt={`${villager}-${villagerId}`} />
-         <h2>{villager}</h2>
-         <p>{catchPhrase}</p>
-    </div>
-   )
+     
+       <Card className={classes.root}>
+         <CardActionArea>
+           <CardMedia
+             className={classes.media}
+             image={villagerImage}
+             title={villager}
+           />
+           <CardContent
+             className={darkMode ? classes.themeDark : classes.themeLight}
+           >
+             <Typography gutterBottom variant="h5" component="h2">
+               {villager}
+             </Typography>
+             <Typography
+               className={darkMode ? classes.themeDark : classes.themeLight}
+               variant="body2"
+               color="textSecondary"
+               component="p"
+             >
+               {catchPhrase}
+             </Typography>
+           </CardContent>
+         </CardActionArea>
+       </Card>
+
+   );
 }
 
-export default Villager
+export default Villager;
