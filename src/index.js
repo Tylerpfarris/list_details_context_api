@@ -6,7 +6,7 @@ import { ThemeProvider } from './components/state/ThemeContext';
 import './index.css';
 
 render(
-  <ThemeProvider>
+  <ThemeProvider >
     <Router>
       <App />
     </Router>
