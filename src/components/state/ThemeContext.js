@@ -6,7 +6,7 @@ const initialState = {
    darkMode: false,
 }
 
-const themeReducer = (state, action) => {
+export const themeReducer = (state, action) => {
    switch (action.type) {
       case "LIGHTMODE":
          return { darkMode: false };
